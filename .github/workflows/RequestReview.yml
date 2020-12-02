@@ -21,6 +21,8 @@ jobs:
             const REVIEW_APPROVED_COLUMN = 11924210;
             const DONE_COLUMN = 11924211;
             //
+            console.log(`Payload: ${JSON.stringify(context.payload, undefined, 2)}`);
+            //
             async function getIssue(issue_number) {
                 try {
                     return (await github.issues.get({
@@ -104,6 +106,7 @@ jobs:
                 console.log("Processing PR: #" + context.payload.number);
                 const issue = await getIssue(context.payload.number);
                 if (issue && issue.state == "open") {
+                    console.log(`Issue: ${JSON.stringify(issue, undefined, 2)}`);
                     processIssue(issue);
                 }
             }
