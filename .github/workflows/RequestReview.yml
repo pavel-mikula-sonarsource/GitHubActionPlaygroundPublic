@@ -15,11 +15,11 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            const TODO_COLUMN = 11144556;
-            const IN_PROGRESS_COLUMN = 11144557;
-            const REVIEW_IN_PROGRESS_COLUMN = 11144558;
-            const REVIEW_APPROVED_COLUMN = 11144559;
-            const DONE_COLUMN = 11144560;
+            const TODO_COLUMN = 11924207;
+            const IN_PROGRESS_COLUMN = 11924208;
+            const REVIEW_IN_PROGRESS_COLUMN = 11924209;
+            const REVIEW_APPROVED_COLUMN = 11924210;
+            const DONE_COLUMN = 11924211;
             //
             async function getIssue(issue_number) {
                 try {
@@ -73,7 +73,6 @@ jobs:
             }
             //
             async function processIssue(issue) {
-
                 removeAssignees(issue);
                 addAssignee(issue, context.payload.requested_reviewer.login);
                 const card = await findCard(issue.url);
