@@ -33,21 +33,22 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           column-id: 11924210     # Kanban "Review approved" column
 
-  LogPayload_job:
-    name: Log payload
-    runs-on: ubuntu-latest
-    steps:
-      - uses: sonarsource/gh-action-lt-backlog/LogPayload@v1
-
-  ExternalReviewApproved_job:
-    name: Created external card in review approved
+  MoveCardToSender_job:
+    name: Move card to review
     runs-on: ubuntu-latest
     if: |
         github.event.pull_request.head.repo.full_name != github.repository
         && github.event.review.author_association != 'NONE'
         && github.event.review.state == 'approved'
     steps:
-      - uses: sonarsource/gh-action-lt-backlog/CreateCardForIssue@v1
+      - uses: sonarsource/gh-action-lt-backlog/MoveCardToSender@v1
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
-          column-id: 11924210     # Kanban "Review approved" column
+          column-id: 123456     # Kanban "Review approved" column
+
+  LogPayload_job:
+    name: Log payload
+    runs-on: ubuntu-latest
+    steps:
+      - uses: sonarsource/gh-action-lt-backlog/LogPayload@v1
+
