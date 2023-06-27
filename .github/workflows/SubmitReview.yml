@@ -50,4 +50,4 @@ jobs:
       - uses: sonarsource/gh-action-lt-backlog/CreateCardForIssue@v1
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
-          column-id: 123456     # Kanban "Review approved" column
+          column-id: 11924210     # Kanban "Review approved" column
