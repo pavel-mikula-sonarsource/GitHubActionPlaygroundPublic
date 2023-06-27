@@ -38,3 +38,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: sonarsource/gh-action-lt-backlog/LogPayload@v1
+
+  ExternalReviewApproved_job:
+    name: Created external card in review approved
+    runs-on: ubuntu-latest
+    if: |
+        github.event.pull_request.head.repo.full_name != github.repository
+        && github.event.review.author_association != 'NONE'
+        && github.event.review.state == 'approved'
+    steps:
+      - uses: sonarsource/gh-action-lt-backlog/CreateCardForIssue@v1
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          column-id: 123456     # Kanban "Review approved" column
