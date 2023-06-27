@@ -33,19 +33,6 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           column-id: 11924210     # Kanban "Review approved" column
 
-  MoveCardToSender_job:
-    name: Move card to sender
-    runs-on: ubuntu-latest
-    if: |
-        github.event.pull_request.head.repo.full_name != github.repository
-        && github.event.review.author_association != 'NONE'
-        && github.event.review.state == 'approved'
-    steps:
-      - uses: sonarsource/gh-action-lt-backlog/MoveCardToSender@Pavel/Dev
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          column-id: 123456     # Kanban "Review approved" column
-
   LogPayload_job:
     name: Log payload
     runs-on: ubuntu-latest
