@@ -14,16 +14,18 @@ jobs:
       # Limit available permissions to a required minimum, because we run under pull_request_target
       repository-projects: write
     # Single quotes must be used here https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#literals
-    # && github.event.author.type != 'Bot'
-    # FIXME: REASON
+
+    # FIXME: Posledni krok
+    # && github.event.pull_request.merged == 'true'
     if: |
         github.event.pull_request.head.repo.full_name != github.repository
+        && github.event.pull_request.user.type != 'Bot'
     steps:
       - uses: sonarsource/gh-action-lt-backlog/CreateNote@Pavel/Dev
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           column-id: 11924207
-          note: Lorem ipsum
+          note: ${{ format('Release notes - External contribution {0}{1} from {2}', '#', github.event.pull_request.number, github.event.user.login) }}
 
   LogPayload_job:
     name: Log payload
