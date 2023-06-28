@@ -8,6 +8,8 @@ jobs:
   CreateCardForStandalonePR_job:
     name: Create release notes card
     runs-on: ubuntu-latest
+    permissions:
+      repository-projects: write
     # Single quotes must be used here https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#literals
     # PRs from forks don't have required token authorization
     # Dependabot works directly under our repository, but doesn't have enough priviledges to create project card
