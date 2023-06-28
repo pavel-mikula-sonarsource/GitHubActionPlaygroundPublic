@@ -25,7 +25,7 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           column-id: 11924207
-          note: ${{ format('Release notes - External contribution {0}{1} from {2}', '#', github.event.pull_request.number, github.event.pull_request.user.login) }}
+          note: ${{ format('Release notes{0} {1} implemented {2}{3}', ':', github.event.pull_request.user.login, '#',  github.event.pull_request.number) }}
 
   LogPayload_job:
     name: Log payload
