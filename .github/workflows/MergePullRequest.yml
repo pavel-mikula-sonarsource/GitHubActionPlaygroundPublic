@@ -11,10 +11,13 @@ jobs:
     # Single quotes must be used here https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#literals
     # PRs from forks don't have required token authorization
     # Dependabot works directly under our repository, but doesn't have enough priviledges to create project card
+
+
+
+    # && github.event.author.type != 'Bot'
+    # FIXME: REASON
     if: |
         github.event.pull_request.head.repo.full_name != github.repository
-        # && github.event.author.type != 'Bot'
-        # FIXME: REASON
     steps:
       - uses: sonarsource/gh-action-lt-backlog/CreateNote@Pavel/Dev
         with:
