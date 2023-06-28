@@ -1,6 +1,8 @@
 name: Closed Pull Request
 
 on:
+  # pull_request_target runs the fork code in our context. Do not use it elsewhere.
+  # Here, it is OK because we're merging external PR and we're 100% sure about its content.
   pull_request_target:
     types: ["closed"]
 
@@ -8,15 +10,10 @@ jobs:
   CreateCardForStandalonePR_job:
     name: Create release notes card
     runs-on: ubuntu-latest
-    #permissions:
-    #  repository-projects: write
-    #permissions: write-all
+    permissions:
+      # Limit available permissions to a required minimum, because we run under pull_request_target
+      repository-projects: write
     # Single quotes must be used here https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#literals
-    # PRs from forks don't have required token authorization
-    # Dependabot works directly under our repository, but doesn't have enough priviledges to create project card
-
-
-
     # && github.event.author.type != 'Bot'
     # FIXME: REASON
     if: |
